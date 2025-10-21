@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\wali;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\Hobi;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -254,3 +255,13 @@ Route::get('/mahasiswa-ke-dosen', function () {
     $mhs = Mahasiswa::where('nim', '123456')->first();
     return "{$mhs->nama} dibimbing oleh {$mhs->dosen->nama}";
 });
+
+Route::get('/many-to-many', [RelasiController::class, 'manyToMany']);
+Route::get('/hobi/bola', function () {
+    $hobi = Hobi::where('nama_hobi', 'Bermain Bola')->first();
+    foreach ($hobi->mahasiswas as $mhs) {
+        echo $mhs->nama . '<br>';
+    }
+});
+
+Route::get('eloquent', [RelasiController::class, 'eloquent']);
