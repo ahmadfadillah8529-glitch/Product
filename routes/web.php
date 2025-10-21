@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\RelasiController;
+use App\Http\Controllers\Biodata2Controller;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PenggunaController;
 use App\Models\Siswa;
+use App\Models\wali;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -153,7 +159,7 @@ route::get('halaman3', function(){
     return view('tampil3', compact('minuman'));
 });
 
-route::get('post', [PostController::class, 'tampil']);
+// route::get('post', [PostController::class, 'tampil']);
 // route::get('post', function(){
 
 //     // MENAMPILKAN DATA TERTENTU
@@ -188,7 +194,7 @@ route::get('siswa', function(){
 
 });
 
-route::get('biodata', [BiodataController::class, 'menampilkan']);
+// route::get('biodata', [BiodataController::class, 'menampilkan']);
 
 // route::get('biodata', function(){
 
@@ -223,3 +229,28 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/product', [ProductController::class, 'index'])->name('product');
+
+
+// Route::get('biodata2', [App\Http\Controllers\Biodata2Controller::class, 'index']);
+// Route::get('biodata2/store', [App\Http\Controllers\Biodata2Controller::class, 'store']);
+// Route::get('biodata2/show', [App\Http\Controllers\Biodata2Controller::class, 'show']);
+// Route::get('biodata2/update', [App\Http\Controllers\Biodata2Controller::class, 'update']);
+// Route::get('biodata2/destroy', [App\Http\Controllers\Biodata2Controller::class, 'destroy']);
+
+
+Route::resource('post', PostController::class);
+
+Route::resource('biodata', Biodata2Controller::class);
+
+Route::resource('penggunas', PenggunaController::class);
+
+Route::get('/one-to-one', [RelasiController::class, 'oneToOne']);
+Route::get('/wali-ke-mahasiswa', function () {
+    $wali = Wali::with('mahasiswa')->first();
+    return "{$wali->nama} adalah wali dari {$wali->mahasiswa->nama}";
+});
+Route::get('/one-to-many', [RelasiController::class, 'oneToMany']);
+Route::get('/mahasiswa-ke-dosen', function () {
+    $mhs = Mahasiswa::where('nim', '123456')->first();
+    return "{$mhs->nama} dibimbing oleh {$mhs->dosen->nama}";
+});
