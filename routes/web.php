@@ -6,6 +6,12 @@ use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\TeleponController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MuridController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PembeliController;
+use App\Http\Controllers\TransaksiController;
 use App\Models\Siswa;
 use App\Models\wali;
 use App\Models\Dosen;
@@ -244,6 +250,7 @@ Route::resource('post', PostController::class);
 Route::resource('biodata', Biodata2Controller::class);
 
 Route::resource('penggunas', PenggunaController::class);
+Route::resource('telepon', TeleponController::class);
 
 Route::get('/one-to-one', [RelasiController::class, 'oneToOne']);
 Route::get('/wali-ke-mahasiswa', function () {
@@ -265,3 +272,10 @@ Route::get('/hobi/bola', function () {
 });
 
 Route::get('eloquent', [RelasiController::class, 'eloquent']);
+
+Route::resource('kelas', KelasController::class);
+Route::resource('murid', MuridController::class);
+
+Route::resource('barang', BarangController::class);
+Route::resource('pembeli', PembeliController::class);
+Route::resource('transaksi', TransaksiController::class);

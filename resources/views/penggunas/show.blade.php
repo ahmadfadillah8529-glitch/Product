@@ -12,16 +12,9 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label class="form-label">Id Pengguna</label>
-                            <input type="text" class="form-control" name="id_pengguna" value="{{$pengguna->id_pengguna}}" >
-                            @error('title')
-                                <small style="color: red;">{{$message}}</small>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Nama</label>
                             <input type="text" class="form-control" name="nama" value="{{$pengguna->nama}}">
-                            @error('content')
+                            @error('nama')
                                 <small style="color: red;">{{$message}}</small>
                             @enderror
                         </div>

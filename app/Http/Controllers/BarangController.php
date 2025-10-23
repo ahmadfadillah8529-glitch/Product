@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengguna;
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
-class PenggunaController extends Controller
+class BarangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-      $pengguna = Pengguna::all();
-      return view('penggunas.index', compact('pengguna'));
+        $barang = Barang::all();
+        return view('barang.index', compact('barang'));
     }
 
     /**
@@ -21,7 +21,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        return view('penggunas.create');
+        return view('barang.create');
     }
 
     /**
@@ -29,13 +29,16 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        $pengguna = new Pengguna;
-        $pengguna->nama = $request->nama;
-        $pengguna->save();
+        $barang = new Barang;
+        $barang->nama_barang = $request->nama_barang;
+        $barang->merek = $request->merek;
+        $barang->harga = $request->harga;
+        $barang->stok = $request->stok;
+        $barang->save();
 
         session()->flash('success', 'Data berhasi di tambahkan');
 
-        return redirect()->route('penggunas.index');
+        return redirect()->route('barang.index');
     }
 
     /**
@@ -43,8 +46,8 @@ class PenggunaController extends Controller
      */
     public function show(string $id)
     {
-        $pengguna = Pengguna::findOrFail($id);
-        return view('penggunas.show', compact('pengguna'));
+        $barang = Barang::findOrFail($id);
+        return view('barang.show', compact('barang'));
     }
 
     /**
@@ -52,8 +55,8 @@ class PenggunaController extends Controller
      */
     public function edit(string $id)
     {
-        $pengguna = Pengguna::findOrFail($id);
-        return view('penggunas.edit', compact('pengguna'));
+        $barang = Barang::findOrFail($id);
+        return view('barang.edit', compact('barang'));
     }
 
     /**
@@ -61,13 +64,16 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pengguna = Pengguna::findOrFail($id);
-        $pengguna->nama = $request->nama;
-        $pengguna->save();
+        $barang = Barang::findOrFail($id);
+        $barang->nama_barang = $request->nama_barang;
+        $barang->merek = $request->merek;
+        $barang->harga = $request->harga;
+        $barang->stok = $request->stok;
+        $barang->save();
 
         session()->flash('success', 'Data berhasi di Edit');
 
-        return redirect()->route('penggunas.index');
+        return redirect()->route('barang.index');
     }
 
     /**
@@ -75,7 +81,7 @@ class PenggunaController extends Controller
      */
     public function destroy(string $id)
     {
-        $pengguna = Pengguna::findOrFail($id);
+        $barang = Barang::findOrFail($id);
 
         //menghapus file cover jika ada
         // if ($posts->cover) {
@@ -84,7 +90,7 @@ class PenggunaController extends Controller
         //         file::delete($filePath);
         //     }
         // }
-        $pengguna->delete();
-        return redirect()->route('penggunas.index')->with('success', 'Data Berhasil di Hapus');
+        $barang->delete();
+        return redirect()->route('barang.index')->with('success', 'Data Berhasil di Hapus');
     }
 }

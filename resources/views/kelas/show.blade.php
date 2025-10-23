@@ -5,15 +5,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Add Data Pengguna</div>
+                <div class="card-header">Show Data Kelas</div>
 
                 <div class="card-body">
-                    <form action="{{ route('penggunas.store')}}" method="post" enctype="multipart/form-data"7>
+                    <form action="{{ route('kelas.show', $kelas->id)}}" method="post" enctype="multipart/form-data"7>
                         @csrf
+                        @method('PUT')
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Nama</label>
-                            <input type="text" class="form-control" name="nama" placeholder="Nama">
-                            @error('nama')
+                            <label for="exampleInputPassword1" class="form-label">Nama Kelas</label>
+                            <input type="text" class="form-control" name="nama_kelas" value="{{$kelas->nama_kelas}}" disabled>
+                            @error('nama_kelas')
                                 <small style="color: red;">{{$message}}</small>
                             @enderror
                         </div>
@@ -24,7 +25,7 @@
                                 <small style="color: red;">{{$message}}</small>
                             @enderror
                         </div> --}}
-                        <button type="submit" class="btn btn-primary">Save</button>
+                       <a href="{{route('kelas.index')}}" class="btn btn-primary">Back</a>
                     </form>
                 </div>
             </div>

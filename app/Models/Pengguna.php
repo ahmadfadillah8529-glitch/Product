@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengguna extends Model
 {
-    protected $fillable = ['id', 'id_pengguna', 'nama'];
+    protected $fillable = ['id', 'nama'];
     public $timestamp = true;
+
+    public function telepon()
+    {
+        return $this->hasOne(Telepon::class,'id_pengguna');
+    }
 }

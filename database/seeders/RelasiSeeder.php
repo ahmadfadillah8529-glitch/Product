@@ -19,7 +19,7 @@ class RelasiSeeder extends Seeder
             'nim' => '123456',
         ]);
 
-        Wali::create([
+        Wali::create([ 
             'nama' => 'Pak Jarot',
             'id_mahasiswa' => $mahasiswa->id
         ]);
